@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Preview</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        h2 {
+            color: #2980b9;
+            margin-top: 25px;
+            border-left: 4px solid #3498db;
+            padding-left: 10px;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .photo-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #3498db;
+        }
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .contact-item {
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+        .download-btn {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .download-btn:hover {
+            background: #2980b9;
+        }
+        ul {
+            padding-left: 20px;
+            list-style-type: square;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        .file-info {
+            color: #7f8c8d;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        .no-data {
+            color: #95a5a6;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Resume Preview</h1>
+        <p class="file-info">Original file: {{ original_filename }}</p>
+
+        <!-- Photo Display -->
+        {% if session.photo_id %}
+        <div class="photo-container">
+            <img src="{{ url_for('serve_photo', photo_id=session.photo_id) }}"
+                alt="Profile Photo" class="photo"
+                onerror="this.style.display='none'">
+        </div>
+        {% endif %}
+
+        <!-- Contact Information -->
+        <div class="section">
+            <h2>Contact Information</h2>
+            <div class="contact-info">
+                {% if parsed_text.contact.name %}
+                <div class="contact-item">
+                    <strong>Name:</strong> {{ parsed_text.contact.name }}
+                </div>
+                {% endif %}
+
+                {% if parsed_text.contact.email %}
+                <div class="contact-item">
+                    <strong>Email:</strong> {{ parsed_text.contact.email }}
+                </div>
+                {% endif %}
+
+                {% if parsed_text.contact.phone %}
+                <div class="contact-item">
+                    <strong>Phone:</strong> {{ parsed_text.contact.phone }}
+                </div>
+                {% endif %}
+
+                {% if parsed_text.contact.linkedin %}
+                <div class="contact-item">
+                    <strong>LinkedIn:</strong>
+                    <a href="{{ parsed_text.contact.linkedin }}" target="_blank">{{ parsed_text.contact.linkedin }}</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Summary -->
+        <div class="section">
+            <h2>Summary</h2>
+            {% if parsed_text.summary %}
+                <p>{{ parsed_text.summary }}</p>
+            {% else %}
+                <p class="no-data">No summary provided</p>
+            {% endif %}
+        </div>
+
+        <!-- Skills -->
+        <div class="section">
+            <h2>Skills</h2>
+            {% if parsed_text.skills %}
+            <ul>
+                {% for skill in parsed_text.skills %}
+                <li>{{ skill }}</li>
+                {% endfor %}
+            </ul>
+            {% else %}
+                <p class="no-data">No skills listed</p>
+            {% endif %}
+        </div>
+
+        <!-- Experience -->
+        <div class="section">
+            <h2>Experience</h2>
+            {% if parsed_text.experience %}
+            <ul>
+                {% for exp in parsed_text.experience %}
+                <li>{{ exp }}</li>
+                {% endfor %}
+            </ul>
+            {% else %}
+                <p class="no-data">No experience listed</p>
+            {% endif %}
+        </div>
+
+        <!-- Education -->
+        <div class="section">
+            <h2>Education</h2>
+            {% if parsed_text.education %}
+            <ul>
+                {% for edu in parsed_text.education %}
+                <li>{{ edu }}</li>
+                {% endfor %}
+            </ul>
+            {% else %}
+                <p class="no-data">No education listed</p>
+            {% endif %}
+        </div>
+
+        <!-- Projects -->
+        <div class="section">
+            <h2>Projects</h2>
+            {% if parsed_text.projects %}
+            <ul>
+                {% for project in parsed_text.projects %}
+                <li>{{ project }}</li>
+                {% endfor %}
+            </ul>
+            {% else %}
+                <p class="no-data">No projects listed</p>
+            {% endif %}
+        </div>
+
+        <!-- Certifications -->
+        <div class="section">
+            <h2>Certifications</h2>
+            {% if parsed_text.certifications %}
+            <ul>
+                {% for cert in parsed_text.certifications %}
+                <li>{{ cert }}</li>
+                {% endfor %}
+            </ul>
+            {% else %}
+                <p class="no-data">No certifications listed</p>
+            {% endif %}
+        </div>
+
+        <a href="{{ url_for('download_file') }}" class="download-btn">Download Parsed Resume</a>
+    </div>
+</body>
+</html>
+
