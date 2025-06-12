@@ -1,4 +1,6 @@
 import base64
+import zipfile
+
 from flask import Flask, render_template, request, send_file, redirect, url_for, flash, session
 from werkzeug.utils import secure_filename
 from docx import Document
@@ -85,30 +87,57 @@ def extract_name(text):
 
     return None
 def extract_photo_from_docx(filepath):
+    MIN_WH_INCH   = 1
+    MIN_FILE_SIZE = 20 * 1024
+
+    min_wh_emus = Inches(MIN_WH_INCH)
+    doc         = Document(filepath)
+
+    def save_and_return(blob, orig_name):
+        if len(blob) < MIN_FILE_SIZE:
+            return None
+        photo_id  = str(uuid.uuid4())
+        ext       = os.path.splitext(orig_name)[1].lower()
+        fname     = f"photo_{photo_id}{ext}"
+        out_path  = os.path.join(app.config['UPLOAD_FOLDER'], fname)
+        with open(out_path, "wb") as f:
+            f.write(blob)
+        return photo_id
+    for shp in doc.inline_shapes:
+        if shp.width < min_wh_emus or shp.height < min_wh_emus:
+            continue
+        blip      = shp._inline.graphic.graphicData.pic.blipFill.blip
+        rel_id    = blip.embed
+        part      = doc.part.related_parts[rel_id]
+        blob      = part.blob
+        pid = save_and_return(blob, part.filename)
+        if pid:
+            return pid
+    for rel in doc.part.rels.values():
+        if rel.reltype == "http://schemas.openxmlformats.org/officeDocument/2006/relationships/image":
+            part = rel._target
+            blob = part.blob
+            try:
+                elm  = rel._target_part._blob
+            except Exception:
+                pass
+            pid = save_and_return(blob, part.filename)
+            if pid:
+                return pid
     try:
-        import zipfile
-
-        with zipfile.ZipFile(filepath, 'r') as docx_zip:
-            image_files = [f for f in docx_zip.namelist()
-                           if f.startswith('word/media/') and
-                           f.lower().endswith(('.jpg', '.jpeg', '.png'))]
-
-            if image_files:
-                image_data = docx_zip.read(image_files[0])
-                ext = os.path.splitext(image_files[0])[1]
-                photo_id = str(uuid.uuid4())
-                photo_filename = f"photo_{photo_id}{ext}"
-                photo_path = os.path.join(app.config['UPLOAD_FOLDER'], photo_filename)
-
-                with open(photo_path, 'wb') as f:
-                    f.write(image_data)
-
-                return photo_id
-        return None
-
-    except Exception as e:
-        app.logger.error(f"Error extracting photo: {str(e)}")
-        return None
+        with zipfile.ZipFile(filepath) as zf:
+            for name in zf.namelist():
+                if not name.startswith("word/media/"):
+                    continue
+                if not name.lower().endswith((".jpg", ".jpeg", ".png")):
+                    continue
+                blob = zf.read(name)
+                pid  = save_and_return(blob, name)
+                if pid:
+                    return pid
+    except Exception:
+        pass
+    return  None
 
 
 def parse_resume(filepath):
