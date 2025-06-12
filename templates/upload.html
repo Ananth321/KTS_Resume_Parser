@@ -3,70 +3,70 @@
 <!--<head>-->
 <!--    <title>Resume Parser</title>-->
 <!--    <style>-->
-<!--            body {-->
-<!--                font-family: Arial, sans-serif;-->
-<!--                max-width: 800px;-->
-<!--                margin: 0 auto;-->
-<!--                padding: 20px;-->
-<!--                background: #eef2f3;-->
-<!--            }-->
-<!--            .container {-->
-<!--                background: #ffffff;-->
-<!--                padding: 20px;-->
-<!--                border-radius: 8px;-->
-<!--                box-shadow: 0 4px 10px rgba(0,0,0,0.2);-->
-<!--            }-->
-<!--            h1 {-->
-<!--                color: #444;-->
-<!--                text-align: center;-->
-<!--                font-size: 24px;-->
-<!--                margin-bottom: 15px;-->
-<!--            }-->
-<!--            .upload-form {-->
-<!--                display: flex;-->
-<!--                flex-direction: column;-->
-<!--                gap: 15px;-->
-<!--            }-->
-<!--            .file-input {-->
-<!--                padding: 10px;-->
-<!--                border: 2px dashed #888;-->
-<!--                border-radius: 4px;-->
-<!--                text-align: center;-->
-<!--                background: #f0f0f0;-->
-<!--                cursor: pointer;-->
-<!--                transition: background 0.3s;-->
-<!--            }-->
-<!--            .file-input:hover {-->
-<!--                background: #e0e0e0;-->
-<!--            }-->
-<!--            .submit-btn {-->
-<!--                background: #4CAF50;-->
-<!--                color: white;-->
-<!--                padding: 12px 18px;-->
-<!--                font-size: 16px;-->
-<!--                border: none;-->
-<!--                border-radius: 4px;-->
-<!--                cursor: pointer;-->
-<!--                transition: background 0.3s;-->
-<!--            }-->
-<!--            .submit-btn:hover {-->
-<!--                background: #45a049;-->
-<!--            }-->
-<!--            .flash-message {-->
-<!--                padding: 10px;-->
-<!--                margin: 5px 0;-->
-<!--                border-radius: 4px;-->
-<!--                font-size: 14px;-->
-<!--            }-->
-<!--            .error {-->
-<!--                background: #ffdddd;-->
-<!--                border-left: 5px solid #f44336;-->
-<!--            }-->
-<!--            p {-->
-<!--                text-align: center;-->
-<!--                font-size: 14px;-->
-<!--                color: #555;-->
-<!--            }-->
+<!--        body {-->
+<!--            font-family: Arial, sans-serif;-->
+<!--            max-width: 800px;-->
+<!--            margin: 0 auto;-->
+<!--            padding: 20px;-->
+<!--            background: #eef2f3;-->
+<!--        }-->
+<!--        .container {-->
+<!--            background: #ffffff;-->
+<!--            padding: 20px;-->
+<!--            border-radius: 8px;-->
+<!--            box-shadow: 0 4px 10px rgba(0,0,0,0.2);-->
+<!--        }-->
+<!--        h1 {-->
+<!--            color: #444;-->
+<!--            text-align: center;-->
+<!--            font-size: 24px;-->
+<!--            margin-bottom: 15px;-->
+<!--        }-->
+<!--        .upload-form {-->
+<!--            display: flex;-->
+<!--            flex-direction: column;-->
+<!--            gap: 15px;-->
+<!--        }-->
+<!--        .file-input {-->
+<!--            padding: 10px;-->
+<!--            border: 2px dashed #888;-->
+<!--            border-radius: 4px;-->
+<!--            text-align: center;-->
+<!--            background: #f0f0f0;-->
+<!--            cursor: pointer;-->
+<!--            transition: background 0.3s;-->
+<!--        }-->
+<!--        .file-input:hover {-->
+<!--            background: #e0e0e0;-->
+<!--        }-->
+<!--        .submit-btn {-->
+<!--            background: #4CAF50;-->
+<!--            color: white;-->
+<!--            padding: 12px 18px;-->
+<!--            font-size: 16px;-->
+<!--            border: none;-->
+<!--            border-radius: 4px;-->
+<!--            cursor: pointer;-->
+<!--            transition: background 0.3s;-->
+<!--        }-->
+<!--        .submit-btn:hover {-->
+<!--            background: #45a049;-->
+<!--        }-->
+<!--        .flash-message {-->
+<!--            padding: 10px;-->
+<!--            margin: 5px 0;-->
+<!--            border-radius: 4px;-->
+<!--            font-size: 14px;-->
+<!--        }-->
+<!--        .error {-->
+<!--            background: #ffdddd;-->
+<!--            border-left: 5px solid #f44336;-->
+<!--        }-->
+<!--        p {-->
+<!--            text-align: center;-->
+<!--            font-size: 14px;-->
+<!--            color: #555;-->
+<!--        }-->
 <!--    </style>-->
 <!--</head>-->
 <!--<body>-->
@@ -88,10 +88,12 @@
 <!--</body>-->
 <!--</html>-->
 
+
+<!--this is for zip file-->
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Resume Parser</title>
+    <title>Resume Batch Parser</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -102,29 +104,30 @@
         }
         .container {
             background: #ffffff;
-            padding: 20px;
+            padding: 30px;
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
         h1 {
             color: #444;
             text-align: center;
-            font-size: 24px;
-            margin-bottom: 15px;
+            font-size: 28px;
+            margin-bottom: 20px;
         }
         .upload-form {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 20px;
         }
         .file-input {
-            padding: 10px;
+            padding: 15px;
             border: 2px dashed #888;
             border-radius: 4px;
             text-align: center;
             background: #f0f0f0;
             cursor: pointer;
             transition: background 0.3s;
+            font-size: 16px;
         }
         .file-input:hover {
             background: #e0e0e0;
@@ -132,8 +135,8 @@
         .submit-btn {
             background: #4CAF50;
             color: white;
-            padding: 12px 18px;
-            font-size: 16px;
+            padding: 15px 25px;
+            font-size: 18px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
@@ -143,25 +146,42 @@
             background: #45a049;
         }
         .flash-message {
-            padding: 10px;
-            margin: 5px 0;
+            padding: 12px;
+            margin: 10px 0;
             border-radius: 4px;
-            font-size: 14px;
+            font-size: 16px;
         }
         .error {
             background: #ffdddd;
             border-left: 5px solid #f44336;
         }
-        p {
-            text-align: center;
-            font-size: 14px;
-            color: #555;
+        .success {
+            background: #ddffdd;
+            border-left: 5px solid #4CAF50;
+        }
+        .instructions {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 25px;
+            border-left: 4px solid #2196F3;
+        }
+        .instructions h3 {
+            margin-top: 0;
+            color: #2196F3;
+        }
+        .instructions ol {
+            padding-left: 20px;
+        }
+        .instructions li {
+            margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Resume Parser</h1>
+        <h1>Resume Batch Processor</h1>
+
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
                 {% for category, message in messages %}
@@ -169,11 +189,35 @@
                 {% endfor %}
             {% endif %}
         {% endwith %}
+
+        <div class="instructions">
+            <h3>How to process multiple resumes:</h3>
+            <ol>
+                <li>Create a ZIP file containing all your .docx resumes</li>
+                <li>Click "Choose File" below and select your ZIP file</li>
+                <li>Click "Process Resumes" to upload and process</li>
+                <li>Download the processed resumes as a ZIP file</li>
+            </ol>
+            <p><strong>Note:</strong> Only .docx files inside the ZIP will be processed (max 50MB total).</p>
+        </div>
+
         <form class="upload-form" method="POST" enctype="multipart/form-data">
-            <input class="file-input" type="file" name="file" accept=".docx" required>
-            <p>Only .docx files are accepted (max 2MB)</p>
-            <button class="submit-btn" type="submit">Upload and Parse</button>
+            <input class="file-input" type="file" name="zip_file" accept=".zip" required>
+            <button class="submit-btn" type="submit">Process Resumes</button>
         </form>
     </div>
+
+    <script>
+        // Client-side validation for file size
+        document.querySelector('form').addEventListener('submit', function(e) {
+            const fileInput = document.querySelector('input[type="file"]');
+            const maxSize = 50 * 1024 * 1024; // 50MB
+
+            if (fileInput.files.length > 0 && fileInput.files[0].size > maxSize) {
+                e.preventDefault();
+                alert('File size exceeds 50MB limit. Please use a smaller ZIP file.');
+            }
+        });
+    </script>
 </body>
 </html>
