@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/deepseek.iml" filepath="$PROJECT_DIR$/.idea/deepseek.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/KTS.iml" filepath="$PROJECT_DIR$/.idea/KTS.iml" />
     </modules>
   </component>
 </project>

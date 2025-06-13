@@ -1,0 +1,23 @@
+# Resume Parser Web App
+
+Project Overview
+
+This is a Flask-based resume parser that:
+- Accepts `.docx` resume files (max 2MB)
+- Extracts contact details (name, email, phone, LinkedIn)
+- Detects and includes profile photo (JPG/PNG) from the resume
+- Parses sections like Summary, Education, Experience, Skills, Certifications, Projects, Achievements
+- Shows preview of the extracted data
+- Allows user to download a formatted `.docx` output
+
+Install the following using `pip`:
+
+- Flask
+- Werkzeug
+- python-docx
+- docx2txt
+- Pillow
+
+Use this command to install everything:
+
+pip install -r requirements.txt
